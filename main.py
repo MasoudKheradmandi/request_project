@@ -13,6 +13,15 @@ class User(Base):
     password = Column(String, nullable=False)
     user_id =  Column(Integer,nullable=False)
 
+class Jwt(Base):
+    __tablename__="jwt"
+    id = Column(Integer, primary_key=True)
+    username =  Column(String, nullable=False)
+    jwt = Column(String, nullable=False)
+    user_id = Column(Integer,nullable=False)
+
+
+
 engine = create_engine("sqlite:///local.db", echo=True)
 
 SessionLocal = sessionmaker(bind=engine)
