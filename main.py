@@ -1,6 +1,8 @@
 # db_sync.py
 from sqlalchemy import create_engine, Column, Integer, String
 from sqlalchemy.orm import DeclarativeBase, sessionmaker
+from fastapi import FastAPI
+
 
 class Base(DeclarativeBase):
     pass
@@ -29,3 +31,10 @@ Base.metadata.create_all(engine)
 
 
 
+app = FastAPI()
+
+@app.get("/ok/")
+async def ok():
+    return {
+        "Ok":"ssOk"
+    }

@@ -1,0 +1,43 @@
+services:
+  fastapi_crawler:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: fastapi_crawler
+    ports:
+      - "8000:8000"
+    networks:
+      - crawler_network
+    volumes:
+      - .:/app
+
+  worker:
+    build: .
+    command: celery -A worker.worker.celery_app worker --loglevel=info
+    volumes:
+      - .:/code
+    depends_on:
+      - rabbitmq
+      - redis
+
+  rabbitmq:
+    image: rabbitmq:3-management
+    ports:
+      - "5672:5672"
+      - "15672:15672"
+
+  redis:
+    image: redis:7
+    ports:
+      - "6379:6379"
+
+  flower:
+    image: mher/flower
+    command: flower --broker=amqp://guest:guest@rabbitmq:5672//
+    ports:
+      - "5555:5555"
+    depends_on:
+      - rabbitmq
+
+networks:
+  crawler_network:
