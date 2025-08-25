@@ -1,0 +1,13 @@
+fastapi[standard]
+uvicorn[standard]
+psycopg[binary]
+sqlalchemy
+alembic
+python-jose
+aio-pika
+pydantic
+redis[hiredis]
+pytest
+httpx
+pytest-asyncio
+aiosqlite
