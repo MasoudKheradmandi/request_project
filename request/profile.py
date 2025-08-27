@@ -1,5 +1,6 @@
 import requests
 
+
 def get_token_and_return(username,password):
     payload = {
         "username":username,
@@ -11,3 +12,4 @@ def get_token_and_return(username,password):
 
 
 print(get_token_and_return(username="josebennett",password="GO62k0Ma+$"))
+
